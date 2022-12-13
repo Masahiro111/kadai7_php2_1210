@@ -28,7 +28,7 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        //
+        return view('bookmarks.create');
     }
 
     /**
@@ -39,7 +39,10 @@ class BookmarkController extends Controller
      */
     public function store(StoreBookmarkRequest $request)
     {
-        //
+        Bookmark::query()
+            ->create($request->all());
+
+        return redirect()->route('dashboard');
     }
 
     /**
