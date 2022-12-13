@@ -42,7 +42,9 @@ class BookmarkController extends Controller
         Bookmark::query()
             ->create($request->validated());
 
-        return redirect()->route('dashboard');
+        return redirect()
+            ->route('dashboard')
+            ->with('status', 'ブックマークを登録しました');
     }
 
     /**
@@ -79,7 +81,9 @@ class BookmarkController extends Controller
         Bookmark::query()
             ->update($request->validated());
 
-        return redirect()->route('bookmarks.edit', $bookmark);
+        return redirect()
+            ->route('bookmarks.edit', $bookmark)
+            ->with('status', 'ブックマークを更新しました');
     }
 
     /**
@@ -90,6 +94,10 @@ class BookmarkController extends Controller
      */
     public function destroy(Bookmark $bookmark)
     {
-        //
+        $bookmark->delete();
+
+        return redirect()
+            ->route('dashboard')
+            ->with('status', 'ブックマークを削除しました');
     }
 }
