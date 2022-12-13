@@ -16,10 +16,14 @@
                         @csrf
                         <p>title:</p>
                         <p><input type="text" name="title" value="{{ $bookmark->title ?? '' }}"></p>
+                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
                         <p>url:</p>
                         <p><input type="text" name="url" value="{{ $bookmark->url ?? '' }} "></p>
+                        <x-input-error :messages="$errors->get('url')" class="mt-2" />
                         <p>description:</p>
                         <p><input type="text" name="description" value="{{ $bookmark->description ?? '' }}"></p>
+                        <x-input-error :messages="$errors->get('description')" class="mt-2" />
+
                         <button type="submit">送信</button>
                         <a href="{{ route('dashboard') }}">もどる</a>
                     </form>

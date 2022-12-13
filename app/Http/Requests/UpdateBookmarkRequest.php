@@ -24,9 +24,9 @@ class UpdateBookmarkRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'url' => 'required',
-            'description' => 'required',
+            'title' => 'required|max:100',
+            'url' => 'required|max:200|url',
+            'description' => 'max:500',
         ];
     }
 }
