@@ -19,9 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [BookmarkController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [BookmarkController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);
+    Route::get('/bookmarks/{bookmark}', [BookmarkController::class, 'show'])->name('bookmarks.show')->whereNumber('id');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
