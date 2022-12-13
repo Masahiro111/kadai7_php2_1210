@@ -40,7 +40,7 @@ class BookmarkController extends Controller
     public function store(StoreBookmarkRequest $request)
     {
         Bookmark::query()
-            ->create($request->all());
+            ->create($request->validated());
 
         return redirect()->route('dashboard');
     }
@@ -64,7 +64,7 @@ class BookmarkController extends Controller
      */
     public function edit(Bookmark $bookmark)
     {
-        //
+        return view('bookmarks.edit', compact('bookmark'));
     }
 
     /**
@@ -76,7 +76,10 @@ class BookmarkController extends Controller
      */
     public function update(UpdateBookmarkRequest $request, Bookmark $bookmark)
     {
-        //
+        Bookmark::query()
+            ->update($request->validated());
+
+        return redirect()->route('bookmarks.edit', $bookmark);
     }
 
     /**

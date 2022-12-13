@@ -11,8 +11,9 @@
                 <div class="p-6 text-gray-900">
                     <p><a href="{{ route('bookmarks.create') }}">新規登録</a></p>
                     @foreach ($bookmarks as $bookmark)
-                    {{ $bookmark->id }}
-                    <a href="{{ route('bookmarks.show', $bookmark) }}">{{ $bookmark->title }}</a>
+                    <p>{{ $bookmark->id }}</p>
+                    <p><a href="{{ route('bookmarks.show', $bookmark) }}">{{ $bookmark->title }}</a></p>
+                    <p><a href="{{ route('bookmarks.edit', $bookmark) }}">編集</a></p>
                     @endforeach
                 </div>
                 {{ $bookmarks->links() }}
