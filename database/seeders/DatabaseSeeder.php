@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Bookmark;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +28,18 @@ class DatabaseSeeder extends Seeder
             'title' => 'sample',
             'url' => 'https://example.com/',
             'description' => 'ブックマークの説明',
+        ]);
+
+        Tag::query()->create([
+            'title' => '文芸',
+        ]);
+
+        Tag::query()->create([
+            'title' => '新書',
+        ]);
+
+        Tag::query()->create([
+            'title' => '実用書',
         ]);
     }
 }
