@@ -17,7 +17,6 @@
                     <p>
                         @foreach ($bookmark->tags as $tag)
                         <a href="{{ route('tags.show', $tag) }}">{{ $tag->title }}</a>
-
                         @endforeach
                     </p>
                     <p><a href="{{ route('bookmarks.edit', $bookmark) }}">編集</a></p>

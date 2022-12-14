@@ -10,8 +10,28 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 @include('components.alert')
                 <div class="p-6 text-gray-900">
-                    タイトル：{{ $tag->title }}<br>
-                    作成日：{{ $tag->created_at->format('Y年m月d日') }}<br>
+                    <h1>{{ $tag->title }}のブックマーク</h1>
+                    <div class="p-6 text-gray-900">
+                        <p><a href="{{ route('bookmarks.create') }}">新規登録</a></p>
+                        @foreach ($bookmarks as $bookmark)
+                        <p>{{ $bookmark->id }}</p>
+                        <p><a href="{{ route('bookmarks.show', $bookmark) }}">{{ $bookmark->title }}</a></p>
+                        <p>
+                            @foreach ($bookmark->tags as $tag)
+                            <a href="{{ route('tags.show', $tag) }}">{{ $tag->title }}</a>
+                            @endforeach
+                        </p>
+                        <p><a href="{{ route('bookmarks.edit', $bookmark) }}">編集</a></p>
+                        <p>
+                        <form action="{{ route('bookmarks.destroy', $bookmark) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit">削除</a>
+                        </form>
+                        </p>
+                        @endforeach
+                    </div>
+                    {{ $bookmarks->links() }}
                 </div>
             </div>
         </div>

@@ -56,7 +56,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('tags.show', compact('tag'));
+        $bookmarks = $tag->bookmarks()->paginate(20);
+        return view('tags.show', compact('tag', 'bookmarks'));
     }
 
     /**
@@ -96,6 +97,7 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+        $tag->bookmarks()->detach();
 
         return redirect()
             ->route('tags.index')
