@@ -43,6 +43,7 @@ class BookmarkController extends Controller
     public function store(StoreBookmarkRequest $request)
     {
         $bookmark = Bookmark::query()
+            ->with('tags')
             ->create($request->validated());
 
         $bookmark->tags()->sync($request->tags);

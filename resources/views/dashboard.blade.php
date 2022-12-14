@@ -14,6 +14,12 @@
                     @foreach ($bookmarks as $bookmark)
                     <p>{{ $bookmark->id }}</p>
                     <p><a href="{{ route('bookmarks.show', $bookmark) }}">{{ $bookmark->title }}</a></p>
+                    <p>
+                        @foreach ($bookmark->tags as $tag)
+                        <a href="{{ route('tags.show', $tag) }}">{{ $tag->title }}</a>
+
+                        @endforeach
+                    </p>
                     <p><a href="{{ route('bookmarks.edit', $bookmark) }}">編集</a></p>
                     <p>
                     <form action="{{ route('bookmarks.destroy', $bookmark) }}" method="post">
