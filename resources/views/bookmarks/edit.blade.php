@@ -14,15 +14,33 @@
                     <form method="POST" action="{{ route('bookmarks.update', $bookmark) }}">
                         @method('PUT')
                         @csrf
+
                         <p>title:</p>
-                        <p><input type="text" name="title" value="{{ $bookmark->title ?? '' }}"></p>
+                        <p><input type="text" name="title" value="{{ old('title', $bookmark->title ?? '') }}"></p>
                         <x-input-error :messages="$errors->get('title')" class="mt-2" />
+
                         <p>url:</p>
-                        <p><input type="text" name="url" value="{{ $bookmark->url ?? '' }} "></p>
+                        <p><input type="text" name="url" value="{{  old('url', $bookmark->url ?? '') }} "></p>
                         <x-input-error :messages="$errors->get('url')" class="mt-2" />
+
                         <p>description:</p>
-                        <p><input type="text" name="description" value="{{ $bookmark->description ?? '' }}"></p>
+                        <p><input type="text" name="description" value="{{  old('description', $bookmark->description ?? '') }}"></p>
                         <x-input-error :messages="$errors->get('description')" class="mt-2" />
+
+                        <p>tags:</p>
+                        <div>
+                            @foreach ($tags as $key => $tag)
+                            <input
+                                   type="checkbox"
+                                   name="tags[]"
+                                   value="{{ $key }}"
+                                   id="tag{{ $key }}"
+                                   @checked (isset($bookmark->tags) && $bookmark->tags->contains($key))
+                            >
+                            <label for="tag{{ $key }}">{{ $tag }}</label>
+                            @endforeach
+                        </div>
+                        <x-input-error :messages="$errors->get('tags')" class="mt-2" />
 
                         <button type="submit">送信</button>
                         <a href="{{ route('dashboard') }}">もどる</a>

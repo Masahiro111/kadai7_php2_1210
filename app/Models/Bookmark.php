@@ -12,4 +12,9 @@ class Bookmark extends Model
     protected $fillable = [
         'title', 'url', 'description',
     ];
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

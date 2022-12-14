@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bookmark;
 use App\Http\Requests\StoreBookmarkRequest;
 use App\Http\Requests\UpdateBookmarkRequest;
+use App\Models\Tag;
 
 class BookmarkController extends Controller
 {
@@ -28,7 +29,9 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        return view('bookmarks.create');
+        $tags = Tag::query()->pluck('title', 'id')->toArray();
+
+        return view('bookmarks.create', compact('tags'));
     }
 
     /**
@@ -39,8 +42,10 @@ class BookmarkController extends Controller
      */
     public function store(StoreBookmarkRequest $request)
     {
-        Bookmark::query()
+        $bookmark = Bookmark::query()
             ->create($request->validated());
+
+        $bookmark->tags()->sync($request->tags);
 
         return redirect()
             ->route('dashboard')
@@ -66,7 +71,9 @@ class BookmarkController extends Controller
      */
     public function edit(Bookmark $bookmark)
     {
-        return view('bookmarks.edit', compact('bookmark'));
+        $tags = Tag::query()->pluck('title', 'id')->toArray();
+
+        return view('bookmarks.edit', compact('bookmark', 'tags'));
     }
 
     /**
@@ -78,8 +85,12 @@ class BookmarkController extends Controller
      */
     public function update(UpdateBookmarkRequest $request, Bookmark $bookmark)
     {
-        Bookmark::query()
+        $bookmark::query()
             ->update($request->validated());
+
+        $bookmark->tags()->sync($request->tags);
+
+
 
         return redirect()
             ->route('bookmarks.edit', $bookmark)
@@ -95,6 +106,8 @@ class BookmarkController extends Controller
     public function destroy(Bookmark $bookmark)
     {
         $bookmark->delete();
+
+        $bookmark->tags()->detach();
 
         return redirect()
             ->route('dashboard')
