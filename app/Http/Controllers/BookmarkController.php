@@ -29,7 +29,9 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        $tags = Tag::query()->pluck('title', 'id')->toArray();
+        $tags = Tag::query()
+            ->pluck('title', 'id')
+            ->toArray();
 
         return view('bookmarks.create', compact('tags'));
     }

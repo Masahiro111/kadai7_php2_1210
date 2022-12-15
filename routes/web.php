@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
+use App\Models\Bookmark;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $bookmarks = Bookmark::query()
+        ->with('tags')
+        ->latest()
+        ->paginate(20);
+
+    return view('welcome', compact('bookmarks'));
+})->name('top');
 
 Route::middleware('auth')->group(function () {
     // Route::get('/dashboard', [BookmarkController::class, 'index'])->name('dashboard')->middleware(['auth', 'verified']);

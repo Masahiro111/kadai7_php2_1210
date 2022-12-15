@@ -1,8 +1,8 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+            <a href="{{ route('top') }}">
+                <span class="text-lg font-bold tracking-wide">ScraBook.</span>
             </a>
         </x-slot>
 
@@ -18,9 +18,9 @@
                 <x-input-label for="password" :value="__('Password')" />
 
                 <x-text-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
+                              type="password"
+                              name="password"
+                              required autocomplete="current-password" />
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
