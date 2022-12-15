@@ -47,22 +47,24 @@
                 <div class="container px-5 pt-12 pb-24 mx-auto">
                     <div class="flex flex-col text-center w-full mb-20">
                         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">New ScraBook !</h1>
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ScraBook. は、手軽にブックマークをシェアするアプリです 📗</p>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">ScraBook. は、手軽にブックマークをシェアできるアプリです 📗</p>
                     </div>
                     <div class="-my-8 divide-y-2 divide-gray-100">
 
                         @foreach ($bookmarks as $bookmark)
                         <div class="py-8 flex flex-wrap md:flex-nowrap hover:bg-blue-50">
-                            <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                            <div class="pl-8 md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
                                 {{-- <span class="font-semibold title-font text-gray-700">CATEGORY</span> --}}
-                                <span class="ml-8 mt-2 text-gray-500 text-sm">{{ $bookmark->created_at }}</span>
+                                <span class="mt-2 text-gray-500 text-sm">{{ $bookmark->created_at }}</span>
                             </div>
                             <a
                                href="{{ $bookmark->url }}"
-                               class="md:flex-grow block">
+                               class="pl-8 pr-8 md:flex-grow block"
+                               target="_blank"
+                               rel="noopener noreferrer">
                                 <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ $bookmark->title }}</h2>
                                 <p class="leading-relaxed mb-1 text-gray-400">{{ $bookmark->description }}</p>
-                                <p class="leading-relaxed mb-4 underline text-indigo-500">{{ $bookmark->url}} </p>
+                                <p class="leading-relaxed mb-4 underline text-indigo-600 hover:text-indigo-900">{{ $bookmark->url}} </p>
                                 <p class="leading-relaxed flex gap-2">
                                     @foreach ($bookmark->tags as $tag)
                                     <span class="inline-flex items-center rounded-full bg-green-100 border border-green-400 px-3 py-0.5 text-sm font-medium text-green-800">{{ $tag->title }}</span>

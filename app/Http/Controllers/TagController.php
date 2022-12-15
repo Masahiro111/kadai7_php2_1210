@@ -80,8 +80,7 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, Tag $tag)
     {
-        Tag::query()
-            ->update($request->validated());
+        $tag->update($request->validated());
 
         return redirect()
             ->route('tags.edit', $tag)

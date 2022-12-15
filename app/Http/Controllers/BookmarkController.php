@@ -88,12 +88,9 @@ class BookmarkController extends Controller
      */
     public function update(UpdateBookmarkRequest $request, Bookmark $bookmark)
     {
-        $bookmark::query()
-            ->update($request->validated());
+        $bookmark->update($request->validated());
 
         $bookmark->tags()->sync($request->tags);
-
-
 
         return redirect()
             ->route('bookmarks.edit', $bookmark)
