@@ -50,7 +50,11 @@
                                         @foreach ($bookmark->tags as $tag)
                                         <a
                                            href="{{ route('tags.show', $tag) }}"
-                                           class="underline text-indigo-600 hover:text-indigo-900">{{ $tag->title }}</a>
+                                           class="">
+                                            <span class="hover:underline inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
+                                                {{ $tag->title }}
+                                            </span>
+                                        </a>
                                         @endforeach
                                     </td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

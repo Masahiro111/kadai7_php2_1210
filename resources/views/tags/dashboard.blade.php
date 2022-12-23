@@ -35,8 +35,11 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $tag->id }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                         <a
-                                           class="underline text-indigo-600 hover:text-indigo-900"
-                                           href="{{ route('tags.show', $tag) }}"> {{ $tag->title }}</a>
+                                           href="{{ route('tags.show', $tag) }}">
+                                            <span class="hover:underline inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
+                                                {{ $tag->title }}
+                                            </span>
+                                        </a>
                                     </td>
                                     <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
                                         <a
